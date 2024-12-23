@@ -1,0 +1,29 @@
+{
+  "name": "codesthenos-api-rest",
+  "version": "1.0.0",
+  "description": "similar to json-server, an api rest with auth and a crud",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "cross-env PORT=5555 node --watch app.js"
+  },
+  "keywords": [
+    "api",
+    "rest",
+    "express",
+    "mongo"
+  ],
+  "author": "codesthenos - Guillermo Ruiz Arranz",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "standard": "^17.1.2"
+  },
+  "eslintConfig": {
+    "extends": "standard"
+  }
+}
