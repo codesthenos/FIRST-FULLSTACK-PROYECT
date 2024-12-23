@@ -1,11 +1,19 @@
+import 'dotenv/config'
 import http from 'node:http'
 import express from 'express'
+import { connectMongoDB } from './lib/connectMongoDB.js'
 
 const port = parseInt(process.env.PORT, 10) || 3333
 
 const app = express()
 
 const server = http.createServer(app)
+
+try {
+  await connectMongoDB()
+} catch (error) {
+  if (port === 5555) console.error(error.message)
+}
 
 server.listen(port, '127.0.0.1')
 
