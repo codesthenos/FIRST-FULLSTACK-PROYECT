@@ -2,7 +2,7 @@
 
 ## BACKEND-API
 
-Parto de la practica que hice para el modulo de backend, que hicimos una SSR app
+Voy a intentar hacer algo parecido a json-server y usar esta api-rest para proveer a la app de frontend de conexion a la base de datos
 
 ## FRONTEND-APP
 
