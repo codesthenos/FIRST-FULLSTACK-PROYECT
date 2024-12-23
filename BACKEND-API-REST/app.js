@@ -3,9 +3,9 @@ import http from 'node:http'
 import express from 'express'
 import { connectMongoDB } from './lib/connectMongoDB.js'
 
-const port = parseInt(process.env.PORT, 10) || 3333
-
 const app = express()
+
+const port = parseInt(process.env.PORT, 10) || 3333
 
 const server = http.createServer(app)
 
