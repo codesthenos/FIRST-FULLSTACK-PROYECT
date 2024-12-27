@@ -4,8 +4,8 @@
   "description": "similar to json-server, an api rest with auth and a crud",
   "type": "module",
   "scripts": {
-    "start": "node app.js",
-    "dev": "cross-env PORT=5555 node --watch app.js"
+    "start": "node server.js",
+    "dev": "cross-env PORT=5555 node --watch server.js"
   },
   "keywords": [
     "api",
