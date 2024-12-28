@@ -1,4 +1,5 @@
 import createHttpError from 'http-errors'
+import jwt from 'jsonwebtoken'
 import { User } from '../models/userModel.js'
 
 export const loginController = async (req, res, next) => {
@@ -14,16 +15,34 @@ export const loginController = async (req, res, next) => {
       next(error)
       return
     }
-    // TODO jwt token sign
-    res.json({ jwToken: formattedUsername })
+
+    const jwToken = jwt.sign(
+      { id: user._id },
+      process.env.JWT_SECRET,
+      { expiresIn: '1d' }
+    )
+    res.json({ jwToken })
   } catch (error) {
     next(error)
   }
 }
 
-export const registerController = (req, res, next) => {
+export const registerController = async (req, res, next) => {
   // TODO
-  res.send('registerController')
+  try {
+    const { username, password } = req.body
+
+    const formattedUsername = username.toLowerCase().trim()
+    const hashedPassword = await User.hashPassword({ password })
+
+    const newUser = new User({ username: formattedUsername, password: hashedPassword })
+
+    const savedUser = await newUser.save()
+
+    res.status(201).json({ message: 'User registered', user: savedUser })
+  } catch (error) {
+    next(error)
+  }
 }
 
 export const deleteUserController = (req, res, next) => {
