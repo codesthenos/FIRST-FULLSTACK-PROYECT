@@ -4,13 +4,7 @@ import {
   loginController,
   registerController
 } from './controllers/userController.js'
-import {
-  getAddsController,
-  createAddController,
-  getAddController,
-  updateAddController,
-  deleteAddController
-} from './controllers/addsController.js'
+import { addsRouter } from './routers/addsRouter.js'
 
 export const app = express()
 
@@ -25,10 +19,6 @@ app.delete('/user/:id', deleteUserController)
 // app.get('/user/:id', getUserController)
 // app.put('/user/:id', updateUserController)
 // ADDS CRUD
-app.get('/adds', getAddsController)
-app.post('/adds', createAddController)
-app.get('/adds/:id', getAddController)
-app.put('/adds/:id', updateAddController)
-app.delete('/adds/:id', deleteAddController)
+app.use('/adds', addsRouter)
 
 // TODO error middleware
