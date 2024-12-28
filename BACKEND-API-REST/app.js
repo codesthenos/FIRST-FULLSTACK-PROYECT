@@ -14,11 +14,13 @@ export const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
+
 // API ROUTES
+// USER AUTH
+app.post('/login', /* validationBodyMiddleware */ loginController)
 // USER CRUD
-app.post('/login', loginController)
-app.post('/register', registerController)
-app.delete('/user/:id', deleteUserController)
+app.post('/register', /* validationBodyMiddleware */ registerController)
+app.delete('/user/:id', /* authMiddleware and userLoggedSameUserToDeleteMiddleware */ deleteUserController)
 // TODO
 // app.get('/user/:id', getUserController)
 // app.put('/user/:id', updateUserController)

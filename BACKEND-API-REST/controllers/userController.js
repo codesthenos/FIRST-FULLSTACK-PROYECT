@@ -28,7 +28,6 @@ export const loginController = async (req, res, next) => {
 }
 
 export const registerController = async (req, res, next) => {
-  // TODO
   try {
     const { username, password } = req.body
 
@@ -45,7 +44,14 @@ export const registerController = async (req, res, next) => {
   }
 }
 
-export const deleteUserController = (req, res, next) => {
-  // TODO
-  res.send('deleteUserController')
+export const deleteUserController = async (req, res, next) => {
+  try {
+    const { id } = req.params
+
+    await User.findByIdAndDelete(id)
+
+    res.json({ message: 'User deleted' })
+  } catch (error) {
+    next(error)
+  }
 }
