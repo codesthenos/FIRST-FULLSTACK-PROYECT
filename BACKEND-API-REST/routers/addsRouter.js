@@ -6,11 +6,12 @@ import {
   updateAddController,
   deleteAddController
 } from '../controllers/addsController.js'
+import { uploadFile } from '../middlewares/uploadFile.js'
 
 export const addsRouter = express.Router()
 
 addsRouter.get('/', getAddsController)
-addsRouter.post('/', createAddController)
+addsRouter.post('/', uploadFile, createAddController)
 addsRouter.get('/:id', getAddController)
-addsRouter.put('/:id', updateAddController)
+addsRouter.put('/:id', uploadFile, updateAddController)
 addsRouter.delete('/:id', deleteAddController)

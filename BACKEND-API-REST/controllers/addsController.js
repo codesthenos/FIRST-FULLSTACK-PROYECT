@@ -28,7 +28,7 @@ export const createAddController = async (req, res, next) => {
 
     const userId = req.userId
 
-    const image = req.file ? `/addsImages/${req.file.filename}` : '/addsImages/placeholder.jpg'
+    const image = req.file ? `/uploadedAddImages/${req.file.filename}` : '/uploadedAddImages/placeholder.jpg'
 
     const formattedPrice = parseFloat(price)
 
@@ -75,7 +75,7 @@ export const updateAddController = async (req, res, next) => {
     const { id } = req.params
 
     const body = req.body
-    const image = req.file ? `/addsImages/${req.file.filename}` : null
+    const image = req.file ? `/uploadedAddImages/${req.file.filename}` : null
 
     const addData = {}
 

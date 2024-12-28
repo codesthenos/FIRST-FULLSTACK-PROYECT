@@ -1,3 +1,4 @@
+import path from 'node:path'
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import createHttpError from 'http-errors'
@@ -13,6 +14,7 @@ export const app = express()
 // MAIN MIDDLEWARES
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(express.static(path.join(import.meta.dirname, 'public')))
 app.use(cookieParser())
 
 // API ROUTES
