@@ -32,7 +32,7 @@ export const createAddController = async (req, res, next) => {
 
     const formattedPrice = parseFloat(price)
 
-    const tagsArray = tags.split(',').map(tag => tag.trim())
+    const tagsArray = typeof tags === 'string' ? tags.split(',').map(tag => tag.trim()) : tags
 
     const newAdd = new Add({
       name,

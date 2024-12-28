@@ -7,8 +7,11 @@ import {
   deleteAddController
 } from '../controllers/addsController.js'
 import { uploadFile } from '../middlewares/uploadFile.js'
+import { isUserLogged } from '../middlewares/userLogged.js'
 
 export const addsRouter = express.Router()
+
+addsRouter.use(isUserLogged)
 
 addsRouter.get('/', getAddsController)
 addsRouter.post('/', uploadFile, createAddController)
