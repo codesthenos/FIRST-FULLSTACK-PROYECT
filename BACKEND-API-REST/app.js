@@ -9,7 +9,8 @@ import { addsRouter } from './routers/addsRouter.js'
 export const app = express()
 
 // TODO express middlewares
-
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 // API ROUTES
 // USER CRUD
 app.post('/login', loginController)
