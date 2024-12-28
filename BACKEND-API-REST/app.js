@@ -8,6 +8,8 @@ import {
   registerController
 } from './controllers/userController.js'
 import { addsRouter } from './routers/addsRouter.js'
+import { isUserLogged } from './middlewares/userLogged.js'
+import { isUserSelf } from './middlewares/userSelf.js'
 
 export const app = express()
 
@@ -22,7 +24,7 @@ app.use(cookieParser())
 app.post('/login', /* validationBodyMiddleware */ loginController)
 // USER CRUD
 app.post('/register', /* validationBodyMiddleware */ registerController)
-app.delete('/user/:id', /* authMiddleware and userLoggedSameUserToDeleteMiddleware */ deleteUserController)
+app.delete('/user/:id', isUserLogged, isUserSelf, deleteUserController)
 // TODO
 // app.get('/user/:id', getUserController)
 // app.put('/user/:id', updateUserController)
