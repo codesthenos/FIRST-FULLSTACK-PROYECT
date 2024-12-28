@@ -1,3 +1,5 @@
+import { Add } from '../models/addModel.js'
+
 export const getAddsController = (req, res, next) => {
   // TODO
   res.send('getAddsController')

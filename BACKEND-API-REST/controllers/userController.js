@@ -1,3 +1,5 @@
+import { User } from '../models/userModel.js'
+
 export const loginController = (req, res, next) => {
   // TODO
   res.send('loginController')
