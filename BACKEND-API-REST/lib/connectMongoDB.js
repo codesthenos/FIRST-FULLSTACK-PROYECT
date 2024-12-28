@@ -5,7 +5,7 @@ mongoose.connection.on('error', error => {
 })
 
 mongoose.connection.on('connected', () => {
-  console.log('Connected to MongoDB')
+  console.log(`Connected to MongoDB: ${mongoose.connection.name}`)
 })
 
 mongoose.connection.on('disconnected', () => {
