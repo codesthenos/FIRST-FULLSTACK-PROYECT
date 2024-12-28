@@ -44,7 +44,20 @@ export const updateAddController = (req, res, next) => {
   res.send('updateAddController')
 }
 
-export const deleteAddController = (req, res, next) => {
-  // TODO
-  res.send('deleteAddController')
+export const deleteAddController = async (req, res, next) => {
+  try {
+    const { id } = req.params
+
+    const deletedAdd = await Add.findByIdAndDelete(id)
+
+    if (!deletedAdd) {
+      const error = createHttpError(404, 'Add not found')
+      next(error)
+      return
+    }
+
+    res.json({ message: 'Add deleted' })
+  } catch (error) {
+    next(error)
+  }
 }

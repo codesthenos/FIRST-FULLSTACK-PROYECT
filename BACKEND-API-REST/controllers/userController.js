@@ -48,7 +48,13 @@ export const deleteUserController = async (req, res, next) => {
   try {
     const { id } = req.params
 
-    await User.findByIdAndDelete(id)
+    const deletedUser = await User.findByIdAndDelete(id)
+
+    if (!deletedUser) {
+      const error = createHttpError(404, 'User not found')
+      next(error)
+      return
+    }
 
     res.json({ message: 'User deleted' })
   } catch (error) {
