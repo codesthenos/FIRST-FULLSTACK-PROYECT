@@ -10,6 +10,7 @@ import {
 import { addsRouter } from './routers/addsRouter.js'
 import { isUserLogged } from './middlewares/userLogged.js'
 import { isUserSelf } from './middlewares/userSelf.js'
+import { userValidator } from './middlewares/validators.js'
 
 export const app = express()
 
@@ -21,9 +22,9 @@ app.use(cookieParser())
 
 // API ROUTES
 // USER AUTH
-app.post('/login', /* validationBodyMiddleware */ loginController)
+app.post('/login', userValidator, loginController)
 // USER CRUD
-app.post('/register', /* validationBodyMiddleware */ registerController)
+app.post('/register', userValidator, registerController)
 app.delete('/user/:id', isUserLogged, isUserSelf, deleteUserController)
 // TODO
 // app.get('/user/:id', getUserController)
