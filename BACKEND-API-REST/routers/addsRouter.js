@@ -16,7 +16,7 @@ export const addsRouter = express.Router()
 
 addsRouter.use(isUserLogged)
 
-addsRouter.get('/', getAddsController)
+addsRouter.get('/', /* queryValidatorMiddleware */ getAddsController)
 addsRouter.post('/', uploadFile, bodyValidator({ schema: addZodSchema }), createAddController)
 addsRouter.get('/:id', getAddController)
 addsRouter.put('/:id', isUserOwner, uploadFile, bodyValidator({ schema: addZodSchema }), updateAddController)

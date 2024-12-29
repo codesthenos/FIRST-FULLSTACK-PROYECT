@@ -23,23 +23,22 @@ app.use(express.static(path.join(import.meta.dirname, 'public')))
 app.use(cookieParser())
 app.use(morgan('dev'))
 
-// API ROUTES
 // USER AUTH
 app.post('/login', bodyValidator({ schema: userZodSchema }), loginController)
 // USER CRUD
 app.post('/register', bodyValidator({ schema: userZodSchema }), registerController)
 app.delete('/user/:id', isUserLogged, isUserSelf, deleteUserController)
-// TODO
-// app.get('/user/:id', getUserController)
-// app.put('/user/:id', updateUserController)
-// ADDS CRUD
+// TODO app.get('/user/:id', getUserController)
+// TODO app.put('/user/:id', updateUserController)
+
+// ADDS ROUTER
 app.use('/adds', addsRouter)
 
-// ERROR HANDLING
+// 404 MIDDLEWARE
 app.use((req, res, next) => {
   next(createHttpError(404, 'Route not found'))
 })
-
+// ERROR MIDDLEWARE
 app.use((error, req, res, next) => {
   res.status(error.status || 500)
   res.json({ error: error.message })
