@@ -10,7 +10,8 @@ import {
 import { addsRouter } from './routers/addsRouter.js'
 import { isUserLogged } from './middlewares/userLogged.js'
 import { isUserSelf } from './middlewares/userSelf.js'
-import { userValidator } from './middlewares/validators.js'
+import { bodyValidator } from './middlewares/validators.js'
+import { userZodSchema } from './lib/zodSchemas.js'
 
 export const app = express()
 
@@ -22,9 +23,9 @@ app.use(cookieParser())
 
 // API ROUTES
 // USER AUTH
-app.post('/login', userValidator, loginController)
+app.post('/login', bodyValidator({ schema: userZodSchema }), loginController)
 // USER CRUD
-app.post('/register', userValidator, registerController)
+app.post('/register', bodyValidator({ schema: userZodSchema }), registerController)
 app.delete('/user/:id', isUserLogged, isUserSelf, deleteUserController)
 // TODO
 // app.get('/user/:id', getUserController)

@@ -20,17 +20,22 @@ export const addZodSchema = z.object({
   price: z.string({
     required_error: 'Provide a price'
   }).refine(
-    value => !isNaN(parseFloat(value)) && parseFloat(value) > 0,
-    { message: 'Price must be a positive number' }
-  ),
+    value => !isNaN(parseFloat(value)) && parseFloat(value) > 0, {
+      message: 'Price must be a positive number'
+    }),
   description: z.string({
     required_error: 'Provide a description'
-  }).maxLength(200, 'Description must be 200 characters or less'),
+  }).max(200, {
+    message: 'Description must be 200 characters or less'
+  }),
   for: z.enum(['offer', 'demand'], {
     required_error: 'For must be offer or demand'
   }),
-  tags: z.array(z.string()).min(1, {
-    message: 'Provide at least one tag'
-  }),
-  image:
+  tags: z.string({
+    required_error: 'Provide at least one tag'
+  }).or(
+    z.array(z.string()).nonempty({
+      message: 'Provide at least one tag'
+    })
+  )
 })
