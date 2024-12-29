@@ -1,6 +1,7 @@
 import path from 'node:path'
 import multer from 'multer'
 import { imageTypes, imageMaxSize } from '../lib/consts.js'
+import createHttpError from 'http-errors'
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -15,8 +16,8 @@ const fileFilter = (req, file, cb) => {
   if (imageTypes.includes(file.mimetype)) {
     cb(null, true)
   } else {
-    req.fileValidationError = true
-    cb(null, false)
+    const error = createHttpError(415, 'Not supported file type. Supported ones jpg, jpeg, png, gif and webp')
+    cb(error, false)
   }
 }
 
