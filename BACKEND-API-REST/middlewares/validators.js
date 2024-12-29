@@ -1,5 +1,6 @@
 import z from 'zod'
 import createHttpError from 'http-errors'
+import { querySchema } from '../lib/zodSchemas.js'
 
 const errorHandler = ({ error }) => {
   if (error instanceof z.ZodError) {
@@ -23,8 +24,7 @@ export const bodyValidator = ({ schema }) => (req, res, next) => {
 
 export const queryValidator = (req, res, next) => {
   try {
-    const query = req.query
-    console.log(query)
+    querySchema.parse(req.query)
 
     next()
   } catch (error) {

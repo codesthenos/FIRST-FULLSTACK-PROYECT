@@ -41,3 +41,30 @@ export const addZodSchema = z.object({
     })
   )
 })
+
+export const querySchema = z.object({
+  skip: z.string().refine(
+    value => !isNaN(parseFloat(value)) && parseFloat(value) >= 0, {
+      message: 'skip has to be greater or equal to 0'
+    }
+  ).optional(),
+  limit: z.string().refine(
+    value => !isNaN(parseFloat(value)) && parseFloat(value) > 0, {
+      message: 'skip has to be greater than 0'
+    }
+  ).optional(),
+  name: z.string().optional(),
+  price: z.string().refine(
+    value => !isNaN(parseFloat(value)) && parseFloat(value) > 0, {
+      message: 'price has to be greater than 0'
+    }
+  ).optional(),
+  for: z.enum(['offer', 'demand']).optional(),
+  tags: z.string().or(
+    z.array(z.string()).nonempty({
+      message: 'Provide at least one tag'
+    }).optional()
+  ),
+  sort: z.enum(['name', 'name-1', 'price', 'price-1']).optional(),
+  fields: z.string().optional()
+})
