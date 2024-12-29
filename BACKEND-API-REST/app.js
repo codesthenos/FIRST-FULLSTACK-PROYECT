@@ -2,6 +2,7 @@ import path from 'node:path'
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import createHttpError from 'http-errors'
+import morgan from 'morgan'
 import {
   deleteUserController,
   loginController,
@@ -20,6 +21,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(import.meta.dirname, 'public')))
 app.use(cookieParser())
+app.use(morgan('dev'))
 
 // API ROUTES
 // USER AUTH

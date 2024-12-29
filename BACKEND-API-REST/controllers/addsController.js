@@ -79,12 +79,15 @@ export const updateAddController = async (req, res, next) => {
 
     const addData = {}
 
-    if (body.name) addData.name = body.name
-    if (body.price) addData.price = parseFloat(body.price)
-    if (body.description) addData.description = body.description
-    if (body.for) addData.for = body.for
-    if (body.tags) addData.tags = body.tags.split(',').map(tag => tag.trim())
-    if (image) addData.image = image
+    addData.name = body.name
+    addData.price = parseFloat(body.price)
+    addData.description = body.description
+    addData.for = body.for
+    addData.tags = typeof body.tags === 'string' ? body.tags.split(',').map(tag => tag.trim()) : body.tags
+
+    if (image) {
+      addData.image = image
+    }
 
     const updatedAdd = await Add.findByIdAndUpdate(id, addData, { new: true })
 

@@ -27,6 +27,8 @@ export const addZodSchema = z.object({
     required_error: 'Provide a description'
   }).max(200, {
     message: 'Description must be 200 characters or less'
+  }).min(10, {
+    message: 'Description must have at least 10 characters'
   }),
   for: z.enum(['offer', 'demand'], {
     required_error: 'For must be offer or demand'
