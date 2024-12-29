@@ -54,17 +54,16 @@ export const querySchema = z.object({
     }
   ).optional(),
   name: z.string().optional(),
-  price: z.string().refine(
-    value => !isNaN(parseFloat(value)) && parseFloat(value) > 0, {
-      message: 'price has to be greater than 0'
-    }
-  ).optional(),
+  price: z.string().regex(/^(-?\d+(\.\d+)?(-\d+(\.\d+)?)?$|^\d+(\.\d+)?-$)/, {
+    message: 'price pattern should be one of these: number | number- | -number | number-number'
+  }).optional(),
   for: z.enum(['offer', 'demand']).optional(),
   tags: z.string().or(
     z.array(z.string()).nonempty({
       message: 'Provide at least one tag'
     }).optional()
   ),
+  owner: z.string().optional(),
   sort: z.enum(['name', 'name-1', 'price', 'price-1']).optional(),
   fields: z.string().optional()
 })

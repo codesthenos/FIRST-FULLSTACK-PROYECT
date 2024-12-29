@@ -43,6 +43,13 @@ const addSchema = new mongoose.Schema({
   }
 }, { timestamps: true })
 
-// TODO create the static method to filter, sort etc
+addSchema.statics.list = ({ filter, options }) => {
+  return Add.find(filter)
+    .skip(options.skip)
+    .limit(options.limit)
+    .sort(options.sort)
+    .select(options.fields)
+    .exec()
+}
 
 export const Add = mongoose.model('Add', addSchema)

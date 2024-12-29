@@ -1,14 +1,29 @@
 import createHttpError from 'http-errors'
 import { Add } from '../models/addModel.js'
+import { normalizePrice, normalizeSort } from '../lib/normalizeParams.js'
 
 export const getAddsController = async (req, res, next) => {
-  // TODO
   try {
-    // queryParams
-    // userId from jwTokenMiddleware
+    const queryParams = req.query
+
+    const filter = {}
+
+    if (queryParams.name) filter.name = new RegExp(`^${queryParams.name.trim()}`, 'i')
+    if (queryParams.price) filter.price = normalizePrice({ price: queryParams.price })
+    if (queryParams.for) filter.for = queryParams.for
+    if (queryParams.tags) filter.tags = queryParams.tags
+    if (queryParams.owner) filter.owner = queryParams.owner
+
+    const options = {}
+
+    if (queryParams.skip) options.skip = +queryParams.skip
+    if (queryParams.limit) options.limit = +queryParams.limit
+    if (queryParams.sort) options.sort = normalizeSort(queryParams.sort)
+    if (queryParams.fields) options.fields = queryParams.fields
+
     const [adds, totalAdds] = await Promise.all([
-      Add.find(),
-      Add.countDocuments()
+      Add.list({ filter, options }),
+      Add.countDocuments(filter)
     ])
     res.json({ adds, totalAdds })
   } catch (error) {
