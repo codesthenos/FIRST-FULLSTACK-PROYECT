@@ -123,8 +123,8 @@ export const handleDeleteUser = async ({ element }) => {
     }, 1500)
   } else {
     try {
-      const user = await getUserInfo({ token })
-      await deleteUserModel({ userId: user.id, token })
+      const { userId } = await getUserInfo({ token })
+      await deleteUserModel({ userId, token })
       localStorage.removeItem('JWT')
       fireNotificationEvent({ element, type: successNoti, message: SUCCESS_MESSAGES.DELETED_USER })
       setTimeout(() => {

@@ -7,7 +7,7 @@ export const deleteUserModel = async ({ userId, token }) => {
     const response = await fetch(query, {
       method: 'DELETE',
       headers: {
-        "Authorization": `Bearer ${token}`
+        "Authorization": `${token}`
       }
     })
     if (!response.ok) {
