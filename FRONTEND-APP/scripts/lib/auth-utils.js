@@ -48,9 +48,9 @@ export const validateRegister = ({ userEmail, userPassword, userPasswordConfirm 
 
 export const handleLogin = async ({ element, userEmail, userPassword, endpoint }) => {
   try {
-    const { accessToken } = await authUser({ userEmail, userPassword, endpoint })
+    const { jwToken } = await authUser({ userEmail, userPassword, endpoint })
 
-    localStorage.setItem('JWT', accessToken)
+    localStorage.setItem('JWT', jwToken)
 
     fireNotificationEvent({ element, type: successNoti, message: SUCCESS_MESSAGES.LOGGED })
 

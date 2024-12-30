@@ -133,15 +133,12 @@ export const indexController = async ({ element, notificationElement, state }) =
       })
     }
     removeLoadingClassNames({ element: notificationElement })
-    // I think i dont want to throw a 'loaded succesfully after loading the homepage, that why its commented
-    // fireNotificationEvent({ element, type: successNoti, message: successMsg })
   } catch (error) {
     element.innerHTML = ''
     fireNotificationEvent({ element, type: errorNoti, errorList: [error.message] })
-    if (error.message === 'Failed to fetch') {
-      setTimeout(() => {
-        window.location.href = '/'
-      }, 1000)
-    }
+
+    setTimeout(() => {
+      window.location.href = '/'
+    }, 1000)
   }
 }

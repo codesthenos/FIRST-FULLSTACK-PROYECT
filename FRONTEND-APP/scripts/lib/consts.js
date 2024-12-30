@@ -38,7 +38,7 @@ export const REGEXP = {
   image: /^https:\/\/.+\.(jpg|jpeg|png|webp|gif|bmp|svg)$/
 }
 // Host
-const HOST = 'http://localhost:5555'
+export const HOST = 'http://localhost:5555'
 // API endpoints
 export const API = {
   REGISTER: `${HOST}/register`,
