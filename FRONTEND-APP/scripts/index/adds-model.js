@@ -27,12 +27,12 @@ export const addsModel = async ({ queryParams }) => {
 
     const response = await fetch(query)
     
-    const { adds } = await response.json()
+    const { adds, totalAdds } = await response.json()
 
     if (!adds.length){
       throw new Error(noAddsMessage)
     } else {
-      return { adds }
+      return { adds, totalAdds }
     }
   } catch (error) {
     throw new Error(error.message)

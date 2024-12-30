@@ -22,26 +22,14 @@ export const indexController = async ({ element, notificationElement, state }) =
     const filterValue = currentQueryParams.likeValue
     const priceMin = currentQueryParams.gteValue
     const priceMax = currentQueryParams.lteValue
-
-    const countAddsQueryParams = { pageValue: null, limitValue: null, likeKey: filterKey, likeValue: filterValue, gteValue: priceMin, lteValue: priceMax }
     
-    const [response, response2] = await Promise.all([
-      addsModel({ queryParams: currentQueryParams }),
-
-      addsModel({ queryParams: countAddsQueryParams })
-    ])
-
-    const numberOfFilteredAdds = response2.adds.length
-
-    const uniqueTags = Array.from(
-      new Set(response2.adds.flatMap(add => add.tags)))
-      .filter(tag => tag)
+    const { adds, totalAdds } = await addsModel({ queryParams: currentQueryParams })
 
     const pagButtonText = currentPaginationParams.pagButtonText
-    const isLastPage = currentPage * limitAdds >= numberOfFilteredAdds
+    const isLastPage = currentPage * limitAdds >= totalAdds
     const isFirstPage = currentPage <= 1
 
-    const currentViewState = { uniqueTags, adds: response.adds, pagButtonText, isFirstPage, isLastPage }
+    const currentViewState = { adds, pagButtonText, isFirstPage, isLastPage }
 
     const addsDiv = addsView({ viewState: currentViewState })
     element.innerHTML = ''
