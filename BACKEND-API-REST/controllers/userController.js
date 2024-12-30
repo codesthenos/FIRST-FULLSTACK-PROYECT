@@ -1,6 +1,7 @@
 import createHttpError from 'http-errors'
 import jwt from 'jsonwebtoken'
 import { User } from '../models/userModel.js'
+import { Add } from '../models/addModel.js'
 
 export const loginController = async (req, res, next) => {
   try {
@@ -55,6 +56,7 @@ export const deleteUserController = async (req, res, next) => {
       next(error)
       return
     }
+    await Add.deleteMany({ owner: id })
 
     res.json({ message: 'User deleted' })
   } catch (error) {

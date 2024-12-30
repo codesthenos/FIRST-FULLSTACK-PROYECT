@@ -2,7 +2,7 @@ import { API } from '../lib/consts.js'
 
 export const deleteAddModel = async ({ addId, token }) => {
   try {
-    const query = `${API.ADD}/${addId}`
+    const query = `${API.ADDS}/${addId}`
 
     const response = await fetch(query, {
       method: 'DELETE',

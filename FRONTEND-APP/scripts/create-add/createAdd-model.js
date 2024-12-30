@@ -4,7 +4,7 @@ export const createAddModel = async ({ addName, addPrice, addDescription, addFor
       method: 'POST',
       body: JSON.stringify({
         name: addName,
-        price: +addPrice,
+        price: addPrice,
         description: addDescription,
         for: addFor,
         image: addImage,
@@ -12,7 +12,7 @@ export const createAddModel = async ({ addName, addPrice, addDescription, addFor
       }),
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
+        "Authorization": `${token}`
       }
     })
     if (!response.ok) {
