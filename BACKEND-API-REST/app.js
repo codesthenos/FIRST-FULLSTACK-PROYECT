@@ -3,6 +3,7 @@ import express from 'express'
 import cookieParser from 'cookie-parser'
 import createHttpError from 'http-errors'
 import morgan from 'morgan'
+import cors from 'cors'
 import {
   deleteUserController,
   loginController,
@@ -22,6 +23,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(import.meta.dirname, 'public')))
 app.use(cookieParser())
 app.use(morgan('dev'))
+app.use(cors({ origin: ['http://localhost:5500', 'http://127.0.0.1:5500'] }))
 
 // USER AUTH
 app.post('/login', bodyValidator({ schema: userZodSchema }), loginController)
