@@ -17,6 +17,7 @@ export const takeCreateAddInputsValue = ({ tagsContainer }) => {
   const addDescriptionValue = addDescriptionInput.value
   const addForValue = addForInput.value
   const addImageValue = addImageInput.value
+  const addImageFile = addImageInput.files[0]
 
   const addTagsValue = []
 
@@ -24,7 +25,7 @@ export const takeCreateAddInputsValue = ({ tagsContainer }) => {
     addTagsValue.push(tagInput.name.toLowerCase())
   })
 
-  return { addNameValue, addPriceValue, addDescriptionValue, addForValue, addImageValue, addTagsValue }
+  return { addNameValue, addPriceValue, addDescriptionValue, addForValue, addImageValue, addTagsValue, addImageFile }
 }
 
 export const validateCreateAdd = ({ addNameValue, addDescriptionValue, addImageValue }) => {
@@ -42,7 +43,7 @@ export const validateCreateAdd = ({ addNameValue, addDescriptionValue, addImageV
     const imageRegExp = new RegExp(REGEXP.image, 'i')
   
     if (!imageRegExp.test(addImageValue)) {
-      errors.push('Image has to start with "https://" and end with ".jpg" or other image extension')
+      errors.push('Image has to end with ".jpg" | "jpeg" | "png" | "webp" | "gif"')
     }
   }
   
@@ -50,9 +51,9 @@ export const validateCreateAdd = ({ addNameValue, addDescriptionValue, addImageV
 }
 
 
-export const handleCreateAdd = async ({ element, addName, addPrice, addDescription, addFor, addImage, addTags, token }) => {
+export const handleCreateAdd = async ({ element, addName, addPrice, addDescription, addFor, addTags, token, addImageFile }) => {
   try {
-    await createAddModel({ addName, addPrice, addDescription, addFor, addImage, addTags, token, endpoint: API.ADDS })
+    await createAddModel({ addName, addPrice, addDescription, addFor, addTags, token, endpoint: API.ADDS, addImageFile })
 
     fireNotificationEvent({ element, type: successNoti, message: SUCCESS_MESSAGES.CREATED_ADD })
 

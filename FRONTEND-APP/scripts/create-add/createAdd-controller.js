@@ -29,7 +29,8 @@ export const createAddController = ({ element, customTag }) => {
         addDescriptionValue,
         addForValue,
         addImageValue,
-        addTagsValue
+        addTagsValue,
+        addImageFile
       } = takeCreateAddInputsValue({ tagsContainer })
   
       const errors = validateCreateAdd({ addNameValue, addDescriptionValue, addImageValue })
@@ -50,8 +51,8 @@ export const createAddController = ({ element, customTag }) => {
           addPrice: addPriceValue,
           addDescription: addDescriptionValue,
           addFor: addForValue,
-          addImage: addImageValue,
           addTags: addTagsValue,
+          addImageFile,
           token
         })
       }

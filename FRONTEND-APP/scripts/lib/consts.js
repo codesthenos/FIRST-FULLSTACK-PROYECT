@@ -35,7 +35,7 @@ export const notiDiv = 'notifications-div'
 // REGEXP
 export const REGEXP = {
   email: /^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/,
-  image: /^https:\/\/.+\.(jpg|jpeg|png|webp|gif|bmp|svg)$/
+  image: /^.+\.(jpg|jpeg|png|webp|gif)$/
 }
 // Host
 export const HOST = 'http://localhost:5555'

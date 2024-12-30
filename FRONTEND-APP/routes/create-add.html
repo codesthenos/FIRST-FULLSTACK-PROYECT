@@ -30,7 +30,7 @@
   <div id="notifications-div" class="notifications-div loading"></div>
 
   <main id="create-add">
-    <form id="create-add-form">
+    <form id="create-add-form" enctype="multipart/form-data">
       <h2>Create add</h2>
       <div class="input-text">
         <input id="name" type="text" name="name" minlength="3" required />
@@ -41,7 +41,7 @@
         <label for="price">Price</label>
       </div>
       <div class="input-text">
-        <input id="image" type="text" name="image" />
+        <input id="image" type="file" name="image" />
         <label for="image">Image</label>
       </div>
       <div class="input-text">

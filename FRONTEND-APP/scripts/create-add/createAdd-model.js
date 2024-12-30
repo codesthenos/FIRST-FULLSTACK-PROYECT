@@ -1,17 +1,21 @@
-export const createAddModel = async ({ addName, addPrice, addDescription, addFor, addImage, addTags, token, endpoint }) => {
+export const createAddModel = async ({ addName, addPrice, addDescription, addFor, addTags, token, endpoint, addImageFile }) => {
   try {
+    const formData = new FormData()
+
+    formData.append('name', addName)
+    formData.append('price', addPrice)
+    formData.append('description', addDescription)
+    formData.append('for', addFor)
+    formData.append('tags', addTags)
+
+    if (addImageFile) {
+      formData.append('image', addImageFile)
+    }
+
     const response = await fetch(endpoint, {
       method: 'POST',
-      body: JSON.stringify({
-        name: addName,
-        price: addPrice,
-        description: addDescription,
-        for: addFor,
-        image: addImage,
-        tags: addTags
-      }),
+      body: formData,
       headers: {
-        "Content-Type": "application/json",
         "Authorization": `${token}`
       }
     })

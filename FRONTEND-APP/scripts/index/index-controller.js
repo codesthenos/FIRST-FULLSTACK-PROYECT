@@ -124,9 +124,10 @@ export const indexController = async ({ element, notificationElement, state }) =
   } catch (error) {
     element.innerHTML = ''
     fireNotificationEvent({ element, type: errorNoti, errorList: [error.message] })
-
-    setTimeout(() => {
-      window.location.href = '/'
-    }, 1000)
+    if (!(error.message === 'No adds')) {
+      setTimeout(() => {
+        window.location.href = '/'
+      }, 1000)
+    }
   }
 }

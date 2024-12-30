@@ -42,7 +42,7 @@ export const createAddController = async (req, res, next) => {
     } = req.body
 
     const userId = req.userId
-
+    console.log(req.file)
     const image = req.file ? `/uploadedAddImages/${req.file.filename}` : '/uploadedAddImages/placeholder.jpg'
 
     const formattedPrice = parseFloat(price)
