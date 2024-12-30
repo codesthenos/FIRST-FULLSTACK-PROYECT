@@ -7,7 +7,8 @@ import cors from 'cors'
 import {
   deleteUserController,
   loginController,
-  registerController
+  registerController,
+  getUserController
 } from './controllers/userController.js'
 import { addsRouter } from './routers/addsRouter.js'
 import { isUserLogged } from './middlewares/userLogged.js'
@@ -30,7 +31,8 @@ app.post('/login', bodyValidator({ schema: userZodSchema }), loginController)
 // USER CRUD
 app.post('/register', bodyValidator({ schema: userZodSchema }), registerController)
 app.delete('/user/:id', isUserLogged, isUserSelf, deleteUserController)
-// TODO app.get('/user/:id', getUserController)
+// returns the user ID if a iser is logged and is self
+app.get('/user/:id', isUserLogged, isUserSelf, getUserController)
 // TODO app.put('/user/:id', updateUserController)
 
 // ADDS ROUTER

@@ -61,3 +61,21 @@ export const deleteUserController = async (req, res, next) => {
     next(error)
   }
 }
+
+export const getUserController = async (req, res, next) => {
+  try {
+    const { id } = req.params
+
+    const user = await User.findById(id)
+
+    if (!user) {
+      const error = createHttpError(404, 'User not found')
+      next(error)
+      return
+    }
+
+    res.json({ userId: user._id })
+  } catch (error) {
+    next(error)
+  }
+}
