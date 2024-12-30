@@ -11,8 +11,9 @@ export const authUser = async ({ userEmail, userPassword, endpoint }) => {
       }
     })
     if (!response.ok) {
-      const error = await response.json()
-      throw new Error(error.message)
+      const { error } = await response.json()
+
+      throw new Error(error)
     } else {
       return await response.json()
     }
