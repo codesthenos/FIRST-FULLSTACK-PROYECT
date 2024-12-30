@@ -30,9 +30,10 @@ app.use(cors({ origin: ['http://localhost:5500', 'http://127.0.0.1:5500'] }))
 app.post('/login', bodyValidator({ schema: userZodSchema }), loginController)
 // USER CRUD
 app.post('/register', bodyValidator({ schema: userZodSchema }), registerController)
-app.delete('/user/:id', isUserLogged, isUserSelf, deleteUserController)
 // returns the user ID if a iser is logged and is self
-app.get('/user/:id', isUserLogged, isUserSelf, getUserController)
+app.get('/user', isUserLogged, getUserController)
+// deletes a user
+app.delete('/user/:id', isUserLogged, isUserSelf, deleteUserController)
 // TODO app.put('/user/:id', updateUserController)
 
 // ADDS ROUTER

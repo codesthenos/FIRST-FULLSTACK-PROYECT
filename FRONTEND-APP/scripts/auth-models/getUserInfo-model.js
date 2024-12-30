@@ -2,9 +2,9 @@ import { API } from '../lib/consts.js'
 
 export const getUserInfo = async ({ token }) => {
   try {
-    const response = await fetch(API.GET_USER_LOGGED_INFO , {
+    const response = await fetch(API.USER , {
       headers: {
-        "Authorization": `Bearer ${token}`
+        "Authorization": `${token}`
       }
     })
     if (!response.ok) {
