@@ -38,22 +38,11 @@ export const REGEXP = {
   image: /^https:\/\/.+\.(jpg|jpeg|png|webp|gif|bmp|svg)$/
 }
 // Host
-const HOST = 'http://localhost:8000'
-// Routes
-const ROUTES = {
-  AUTH: '/auth',
-  PUBLIC: '/api'
-}
-// Query param to get the USER info from an ADD
-export const expand = '?_expand=user'
+const HOST = 'http://localhost:5555'
 // API endpoints
 export const API = {
-  ADDS: `${HOST}${ROUTES.PUBLIC}/adds${expand}`,
-  ADD: `${HOST}${ROUTES.PUBLIC}/adds`,
-  REGISTER: `${HOST}${ROUTES.AUTH}/register`,
-  LOGIN: `${HOST}${ROUTES.AUTH}/login`,
-  GET_USER_LOGGED_INFO: `${HOST}${ROUTES.AUTH}/me`,
-  BACKUP_ADDS: `${HOST}${ROUTES.PUBLIC}/backupAdds`,
-  BACKUP_USERS: `${HOST}${ROUTES.PUBLIC}/backupUsers`,
-  USERS: `${HOST}${ROUTES.PUBLIC}/users`
+  REGISTER: `${HOST}/register`,
+  LOGIN: `${HOST}/login`,
+  DELETE_USER: `${HOST}/user`,
+  ADDS: `${HOST}/adds`
 }

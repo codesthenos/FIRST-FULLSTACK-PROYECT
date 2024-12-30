@@ -13,10 +13,11 @@ import { addZodSchema } from '../lib/zodSchemas.js'
 import { isUserOwner } from '../middlewares/userOwner.js'
 
 export const addsRouter = express.Router()
+// I dont want the get all adds route to be auth thats why its before the isUserLogged
+addsRouter.get('/', queryValidator, getAddsController)
 
 addsRouter.use(isUserLogged)
 
-addsRouter.get('/', queryValidator, getAddsController)
 addsRouter.post('/', uploadFile, bodyValidator({ schema: addZodSchema }), createAddController)
 addsRouter.get('/:id', getAddController)
 addsRouter.put('/:id', isUserOwner, uploadFile, bodyValidator({ schema: addZodSchema }), updateAddController)
