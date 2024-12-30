@@ -43,6 +43,6 @@ export const HOST = 'http://localhost:5555'
 export const API = {
   REGISTER: `${HOST}/register`,
   LOGIN: `${HOST}/login`,
-  DELETE_USER: `${HOST}/user`,
+  USER: `${HOST}/user`,
   ADDS: `${HOST}/adds`
 }
