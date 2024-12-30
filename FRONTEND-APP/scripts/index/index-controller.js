@@ -22,12 +22,12 @@ export const indexController = async ({ element, notificationElement, state }) =
     const filterValue = currentQueryParams.likeValue
     const priceMin = currentQueryParams.gteValue
     const priceMax = currentQueryParams.lteValue
-    
+
     const { adds, totalAdds } = await addsModel({ queryParams: currentQueryParams })
 
     const pagButtonText = currentPaginationParams.pagButtonText
-    const isLastPage = currentPage * limitAdds >= totalAdds
-    const isFirstPage = currentPage <= 1
+    const isLastPage = currentPage + limitAdds >= totalAdds
+    const isFirstPage = currentPage === 0
 
     const currentViewState = { adds, pagButtonText, isFirstPage, isLastPage }
 
@@ -106,7 +106,7 @@ export const indexController = async ({ element, notificationElement, state }) =
     const nextPageButton = document.getElementById(nextPageButtonId)
     if (nextPageButton) {
       nextPageButton.addEventListener('click', () => {
-        const state = calculatePagState({ gteValue: priceMin, lteValue: priceMax, page: currentPage + 1, addsPerPage: currentQueryParams.limitValue, likeKey: filterKey, likeValue: filterValue, pagButtonText })
+        const state = calculatePagState({ gteValue: priceMin, lteValue: priceMax, page: currentPage + currentQueryParams.limitValue, addsPerPage: currentQueryParams.limitValue, likeKey: filterKey, likeValue: filterValue, pagButtonText })
 
         indexController({ element, notificationElement, state })
       })
@@ -115,7 +115,7 @@ export const indexController = async ({ element, notificationElement, state }) =
     const previousPageButton = document.getElementById(previousPageButtonId)
     if (previousPageButton) {
       previousPageButton.addEventListener('click', () => {
-        const state = calculatePagState({ gteValue: priceMin, lteValue: priceMax, page: currentPage - 1, addsPerPage: currentQueryParams.limitValue, likeKey: filterKey, likeValue: filterValue, pagButtonText })
+        const state = calculatePagState({ gteValue: priceMin, lteValue: priceMax, page: currentPage - currentQueryParams.limitValue, addsPerPage: currentQueryParams.limitValue, likeKey: filterKey, likeValue: filterValue, pagButtonText })
 
         indexController({ element, notificationElement, state })
       })

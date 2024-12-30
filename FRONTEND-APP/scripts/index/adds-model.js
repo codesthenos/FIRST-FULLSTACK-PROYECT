@@ -6,8 +6,8 @@ export const addsModel = async ({ queryParams }) => {
     const { pageValue, limitValue, likeKey, likeValue, gteValue, lteValue } = queryParams
 
     let query = API.ADDS
-    if (pageValue && limitValue) {
-      query = `${query}?_page=${pageValue}&_limit=${limitValue}`
+    if ((pageValue || pageValue === 0) && limitValue) {
+      query = `${query}?skip=${pageValue}&limit=${limitValue}`
     }
 
     if (likeValue) {
