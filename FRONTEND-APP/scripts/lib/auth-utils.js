@@ -100,7 +100,7 @@ export const handleDeleteAdd = async ({ element, add }) => {
         token,
         endpoint: API.BACKUP_ADDS
       })
-      await deleteAddModel({ addId: add.id, token })
+      await deleteAddModel({ addId: add._id, token })
       fireNotificationEvent({ element, type: successNoti, message: SUCCESS_MESSAGES.DELETED_ADD })
       setTimeout(() => {
         window.location.href = '/'
@@ -147,10 +147,10 @@ export const isUserLoggedOwner = async ({ element, add }) => {
 
   if (token) {
     try {
-      const ownerId = add.user.id
-      const user = await getUserInfo({ token })
+      const ownerId = add.owner._id
+      const { userId } = await getUserInfo({ token })
 
-      return ownerId === user.id
+      return ownerId === userId
     } catch (error) {
       fireNotificationEvent({ element, type: errorNoti, errorList: [error.message] })
     }

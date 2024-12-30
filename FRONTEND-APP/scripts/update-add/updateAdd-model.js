@@ -11,7 +11,7 @@ export const updateAddModel = async ({
   addTagsValue
 }) => {
   try {
-    const query = `${API.ADD}/${add.id}`
+    const query = `${API.ADDS}/${add._id}`
     const response = await fetch(query, {
       method: 'PUT',
       body: JSON.stringify({

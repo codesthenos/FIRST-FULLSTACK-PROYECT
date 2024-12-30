@@ -18,4 +18,4 @@ export const buttonDescDivClassName = 'buttons-desc-div'
 
 export const addUpdateButtonHref = '/routes/update-add.html?id='
 
-export const findAdd = ({ adds, addId }) => adds.find(add => add.id === addId)
+export const findAdd = ({ adds, addId }) => adds.find(add => add._id === addId)

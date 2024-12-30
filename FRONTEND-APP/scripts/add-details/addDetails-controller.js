@@ -17,8 +17,7 @@ export const addDetailsController = async ({ element, notificationElement, addId
   fireNotificationEvent({ element, type: loadingNoti })
 
   try {
-    const response = await addDetailsModel({ addId })
-    const add = response.add
+    const { add } = await addDetailsModel({ addId })
 
     if (!await isUserLoggedOwner({ element, add })) {
       const publicAddDetailDiv = publicAddDetailView({ add })

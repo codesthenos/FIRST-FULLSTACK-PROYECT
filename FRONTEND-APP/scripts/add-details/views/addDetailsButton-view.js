@@ -6,7 +6,7 @@ export const addDetailButtonView = ({ buttonId, buttonText, buttonHref, add }) =
   addButton.classList.add(buttonClassName)
   addButton.textContent = buttonText
   if (buttonHref) {
-    const addButtonHref = `${buttonHref}${add.id}`
+    const addButtonHref = `${buttonHref}${add._id}`
     addButton.setAttribute('href', addButtonHref)
   }
 

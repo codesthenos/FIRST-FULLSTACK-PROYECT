@@ -73,7 +73,7 @@ export const handleUpdateAdd = async ({
       })
       fireNotificationEvent({ element, type: successNoti, message: SUCCESS_MESSAGES.UPDATED_ADD })
       setTimeout(() => {
-        window.location.href = `/routes/add-details.html?id=${add.id}`
+        window.location.href = `/routes/add-details.html?id=${add._id}`
       }, 1000)
     } catch (error) {
       fireNotificationEvent({ element, type: errorNoti, errorList: [error.message] })
