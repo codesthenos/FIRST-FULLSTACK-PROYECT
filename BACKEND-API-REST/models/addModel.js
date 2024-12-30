@@ -45,6 +45,7 @@ const addSchema = new mongoose.Schema({
 
 addSchema.statics.list = ({ filter, options }) => {
   return Add.find(filter)
+    .populate('owner', 'username')
     .skip(options.skip)
     .limit(options.limit)
     .sort(options.sort)

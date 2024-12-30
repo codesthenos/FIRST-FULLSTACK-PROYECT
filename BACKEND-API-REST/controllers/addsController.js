@@ -71,7 +71,7 @@ export const getAddController = async (req, res, next) => {
   try {
     const { id } = req.params
 
-    const add = await Add.findById(id)
+    const add = await Add.findById(id).populate('owner', 'username')
 
     if (!add) {
       const error = createHttpError(404, 'Add not found')
