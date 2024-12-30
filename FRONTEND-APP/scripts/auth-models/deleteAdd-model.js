@@ -7,12 +7,12 @@ export const deleteAddModel = async ({ addId, token }) => {
     const response = await fetch(query, {
       method: 'DELETE',
       headers: {
-        "Authorization": `Bearer ${token}`
+        "Authorization": `${token}`
       }
     })
     if (!response.ok) {
-      const error = await response.json()
-      throw new Error(error.message)
+      const { error } = await response.json()
+      throw new Error(error)
     }
   } catch (error) {
     throw new Error(error.message)
