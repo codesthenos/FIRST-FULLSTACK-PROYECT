@@ -1,5 +1,5 @@
 import createHttpError from 'http-errors'
-import { Add } from '../models/addModel.js'
+import { Add, BackupAdd } from '../models/addModel.js'
 import { normalizePrice, normalizeSort } from '../lib/normalizeParams.js'
 
 export const getAddsController = async (req, res, next) => {
@@ -122,13 +122,19 @@ export const deleteAddController = async (req, res, next) => {
   try {
     const { id } = req.params
 
-    const deletedAdd = await Add.findByIdAndDelete(id)
+    const addToDelete = await Add.findById(id)
 
-    if (!deletedAdd) {
+    if (!addToDelete) {
       const error = createHttpError(404, 'Add not found')
       next(error)
       return
     }
+
+    const backupAdd = new BackupAdd(addToDelete.toObject())
+
+    await backupAdd.save()
+
+    await Add.findByIdAndDelete(id)
 
     res.json({ message: 'Add deleted' })
   } catch (error) {

@@ -54,3 +54,4 @@ addSchema.statics.list = ({ filter, options }) => {
 }
 
 export const Add = mongoose.model('Add', addSchema)
+export const BackupAdd = mongoose.model('BackupAdd', addSchema)
