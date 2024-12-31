@@ -127,7 +127,7 @@ export const indexController = async ({ element, notificationElement, state }) =
     fireNotificationEvent({ element, type: errorNoti, errorList: [error.message] })
     if (!(error.message === 'No adds') || currentPage || limitAdds || filterKey || priceMax || priceMin) {
       setTimeout(() => {
-        window.location.href = '/'
+        window.location.href = 'index.html'
       }, 1000)
     }
   }
