@@ -3,7 +3,7 @@ import { addLiHTML } from '../../lib/addLi-InnerHTML.js'
 
 export const addIntoAnchorHTML = add => {
   const addHTML = `
-    <a href="/routes/add-details.html?id=${add._id}">
+    <a href="routes/add-details.html?id=${add._id}">
       <li class="${addLiClassName}">
         ${addLiHTML(add)}
       </li>
