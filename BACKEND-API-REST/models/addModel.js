@@ -54,4 +54,8 @@ addSchema.statics.list = ({ filter, options }) => {
 }
 
 export const Add = mongoose.model('Add', addSchema)
-export const BackupAdd = mongoose.model('BackupAdd', addSchema)
+
+const backupAddSchema = new mongoose.Schema(addSchema.obj, { timestamps: true })
+backupAddSchema.index({ createdAt: 1 }, { expireAfterSeconds: 2592000 }) // 30 days
+
+export const BackupAdd = mongoose.model('BackupAdd', backupAddSchema)
