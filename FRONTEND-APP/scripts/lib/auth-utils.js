@@ -88,20 +88,6 @@ export const handleDeleteAdd = async ({ element, add }) => {
     }, 1500)
   } else {
     try {
-      // No se si te va a gustar Edu, pero para seguir jugando y aprendiendo, se me ocurrio que
-      // borrar un anuncio, no implicase que perdiesemos la info, aunque se que en la vida real
-      // habria que ver el aspecto legal de quedarse con data o avisar al user etc...
-      /*
-      await createAddModel({
-        addName: add.name,
-        addPrice: add.price,
-        addDescription: add.description,
-        addFor: add.for,
-        addImage: add.image,
-        token,
-        endpoint: API.BACKUP_ADDS
-      })
-      */
       await deleteAddModel({ addId: add._id, token })
       fireNotificationEvent({ element, type: successNoti, message: SUCCESS_MESSAGES.DELETED_ADD })
       setTimeout(() => {
