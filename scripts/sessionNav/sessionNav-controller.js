@@ -23,8 +23,13 @@ export const sessionNavController = ({ element }) => {
         event.preventDefault()
         localStorage.removeItem('JWT')
         fireNotificationEvent({ element, type: successNoti, message: SUCCESS_MESSAGES.LOGOUT })
+        const currentPath = window.location.pathname
         setTimeout(() => {
-          window.location.href = '/'
+          if (currentPath === '/' || currentPath.endsWith('/index.html')) {
+            window.location.href = 'index.html'
+          } else {
+            window.location.href = '../index.html'
+          }
         }, 750)
       })
     }
