@@ -1,0 +1,255 @@
+:root {
+  --bg-color: #2c2d2e;
+  --scroll-thumb-color: #2c2d2e40;
+  --color: #e5e5e5;
+  --brand-color: #32a852;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-color: #e5e5e5;
+    --color: #2c2d2e;
+  }
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--color);
+  margin: .5rem;
+}
+
+h1, h2, h3, a, label, input, form, pre, textarea {
+  display: block;
+  margin-top: .5rem;
+  margin-left: .5rem;
+}
+
+input, textarea {
+  padding: .5em;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  transition: box-shadow .25s linear, background-color .75s linear
+}
+
+label {
+  transition: color .5s linear;
+}
+
+input, label, textarea {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+input, textarea {
+  &:hover {
+    box-shadow: 0 0 5px 5px var(--brand-color);
+  }
+}
+
+input, textarea {
+  &:focus {
+    cursor: text;
+    box-shadow: 0 0 5px 5px var(--brand-color);
+    color: var(--color);
+    background-color: var(--bg-color);
+    +label {
+      color: var(--brand-color);
+    }
+  }
+}
+
+.btn {
+  cursor: pointer;
+  user-select: none;
+  color: var(--color);
+  background-color: var(--brand-color);
+  border: 3px solid var(--color);
+  padding: .75em;
+  max-width: fit-content;
+  max-height: fit-content;
+  text-align: center;
+  border-radius: 15px;
+  font-weight: bold;
+  transition: all .25s linear;
+  &.disabled {
+    pointer-events: none;
+    opacity: .5;
+  }
+}
+
+.btn:hover {
+  color: var(--brand-color);
+  background-color: var(--color);
+  border: 3px solid var(--brand-color);
+  scale: 1.1;
+}
+
+img {
+  max-height: 150px;
+  aspect-ratio: 1;
+  border-radius: 100px;
+}
+
+.header {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .header-logo {
+    background-color: var(--brand-color);
+    border-radius: 40px;
+    padding: .5rem;
+    border: 3px solid var(--color);
+    a {
+      margin: 0;
+      img {
+        height: 40px;
+        width: 120px;
+      }
+    }
+  }
+  nav {
+    display: flex;
+    gap: 1rem;
+    a {
+      margin: 0;
+      display: none;
+      &.shown {
+        display: block;
+      }
+    }
+  }
+}
+
+.add-card {
+  width: 180px;
+  background-color: var(--brand-color);
+  border: 3px solid var(--color);
+  border-radius: 15px;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  h4 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  h3 {
+    margin: 0;
+    margin-bottom: .5rem;
+    font-size: 1.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 1.1em;
+  }
+  span {
+    text-align: left;
+    font-weight: bold;
+  }
+  p {
+    max-height: 1.1em;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .for-p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  -webkit-clip-path: inset(50%);
+  clip-path: inset(50%);
+  height: 1px;
+  width: 1px;
+  padding: 0;
+  border: 0;
+  margin: -1px;
+  overflow: hidden;
+  white-space: nowrap; 
+}
+
+.notifications-div {
+  width: fit-content;
+  padding: 0 1rem;
+  height: 15vh;
+  max-width: 800px;
+  margin: 3rem auto;
+  border: 1px solid var(--bg-color);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &.loading {
+    display: block;
+    width: 75px;
+    height: 75px;
+    border-radius: 100px;
+    background-color: transparent;
+    border: 12px solid var(--brand-color);
+    border-top-color: var(--color);
+    border-left-color: var(--color);
+    margin: 5rem auto;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    inset: 20% 0;
+    z-index: 10;
+    + main {
+      opacity: .3;
+    }
+  }
+  &.error {
+    border-color: red;
+    background-color: lightcoral;
+    width: fit-content;
+    height: fit-content;
+    padding: 1.5rem;
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      .error-h2 {
+        margin: 0;
+        color: rgb(204, 31, 31);
+        background-color: lightcoral;
+        font-size: 2rem;
+      }
+    }
+  }
+  &.success {
+    border-color: blue;
+    background-color: lightskyblue;
+    width: fit-content;
+    height: fit-content;
+    padding: 1.5rem;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 20%;
+    z-index: 10;
+    .success-h2 {
+      margin: 0;
+      color: rgb(31, 130, 192);
+      background-color: lightskyblue;
+      font-size: 2rem;
+    }
+    +main#login-register {
+      opacity: .5;
+    }
+  }
+}
+
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
