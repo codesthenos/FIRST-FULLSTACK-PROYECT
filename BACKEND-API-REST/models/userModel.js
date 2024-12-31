@@ -21,7 +21,10 @@ userSchema.methods.comparePassword = function ({ password }) {
 
 export const User = mongoose.model('User', userSchema)
 
-const backupUserSchema = new mongoose.Schema(userSchema.obj, { timestamps: true })
+const backupUserObj = { ...userSchema.obj }
+delete backupUserObj.username.unique
+
+const backupUserSchema = new mongoose.Schema(backupUserObj, { timestamps: true })
 backupUserSchema.index({ createdAt: 1 }, { expireAfterSeconds: 2592000 })
 
 export const BackupUser = mongoose.model('BackupUser', backupUserSchema)
