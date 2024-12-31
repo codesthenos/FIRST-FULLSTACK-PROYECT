@@ -1,0 +1,27 @@
+{
+  "name": "fullstack-first-project-codesthenos",
+  "version": "1.0.0",
+  "description": "express api and vanilla js frontend app crud auth",
+  "keywords": [
+    "fullstack",
+    "crud",
+    "auth"
+  ],
+  "homepage": "https://codesthenos.github.io/FIRST-FULLSTACK-PROYECT",
+  "bugs": {
+    "url": "https://github.com/codesthenos/FIRST-FULLSTACK-PROYECT/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codesthenos/FIRST-FULLSTACK-PROYECT.git"
+  },
+  "license": "ISC",
+  "author": "codesthenos - Guillermo Ruiz Arranz",
+  "type": "module",
+  "scripts": {
+    "deploy": "gh-pages -d frontend"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.2.0"
+  }
+}
