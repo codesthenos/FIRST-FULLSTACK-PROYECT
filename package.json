@@ -19,7 +19,7 @@
   "author": "codesthenos - Guillermo Ruiz Arranz",
   "type": "module",
   "scripts": {
-    "deploy": "gh-pages -d frontend"
+    "deploy": "gh-pages -d FRONTEND-APP"
   },
   "devDependencies": {
     "gh-pages": "^6.2.0"
