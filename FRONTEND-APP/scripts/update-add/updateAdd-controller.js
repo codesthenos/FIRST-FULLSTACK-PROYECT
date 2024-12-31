@@ -70,7 +70,8 @@ export const updateAddController = async ({ element, addId, customTag }) => {
             addDescriptionValue,
             addForValue,
             addImageValue,
-            addTagsValue
+            addTagsValue,
+            addImageFile
           } = takeCreateAddInputsValue({ tagsContainer })
   
           const errors = validateCreateAdd({
@@ -89,8 +90,8 @@ export const updateAddController = async ({ element, addId, customTag }) => {
               addPriceValue,
               addDescriptionValue,
               addForValue,
-              addImageValue,
-              addTagsValue
+              addTagsValue,
+              addImageFile
             })
           }
         })

@@ -1,5 +1,5 @@
 import { CREATE_ADD_VALUES } from '../create-add/lib/consts.js'
-import { errorNoti, loadingNoti, SUCCESS_MESSAGES, successNoti } from '../lib/consts.js'
+import { errorNoti, HOST, loadingNoti, SUCCESS_MESSAGES, successNoti } from '../lib/consts.js'
 import { fireNotificationEvent } from '../lib/fire-notification-event.js'
 import { updateAddModel } from './updateAdd-model.js'
 
@@ -14,16 +14,20 @@ export const setUpdateAddInputValues = ({
 }) => {
   const addNameInput = document.getElementById(CREATE_ADD_VALUES.NAME)
   const addPriceInput = document.getElementById(CREATE_ADD_VALUES.PRICE)
-  const addImageInput = document.getElementById(CREATE_ADD_VALUES.IMAGE)
   const addDescriptionInput = document.getElementById(CREATE_ADD_VALUES.DESCRIPTION)
   const addOfferInput = document.getElementById('offer')
   const addDemandInput = document.getElementById('demand')
+
+  const currentImageDiv = document.getElementById('current-image')
+  currentImageDiv.innerHTML = `
+  <h3>Current image</h3>
+  <img src="${HOST}${addImage}" alt="${addName}" />
+  `
 
   const dinamicTagsInputs = tagsContainer.querySelectorAll('input')
   
   addNameInput.value = addName
   addPriceInput.value = addPrice
-  addImageInput.value = addImage
   addDescriptionInput.value = addDescription
 
   dinamicTagsInputs.forEach(dinamicTag => {
@@ -47,8 +51,8 @@ export const handleUpdateAdd = async ({
   addPriceValue,
   addDescriptionValue,
   addForValue,
-  addImageValue,
-  addTagsValue
+  addTagsValue,
+  addImageFile
 }) => {
   const token = localStorage.getItem('JWT')
 
@@ -68,8 +72,8 @@ export const handleUpdateAdd = async ({
         addPriceValue,
         addDescriptionValue,
         addForValue,
-        addImageValue,
-        addTagsValue
+        addTagsValue,
+        addImageFile
       })
       fireNotificationEvent({ element, type: successNoti, message: SUCCESS_MESSAGES.UPDATED_ADD })
       setTimeout(() => {

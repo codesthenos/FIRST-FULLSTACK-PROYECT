@@ -16,6 +16,12 @@
       text-align: left;
       cursor: default;
     }
+    #current-image {
+      margin-top: 1rem;
+      img {
+        margin-top: .5rem;
+      }
+    }
     .tags-container {
       margin-top: .5rem;
       max-width: 300px;
