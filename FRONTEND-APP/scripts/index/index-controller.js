@@ -12,16 +12,17 @@ export const indexController = async ({ element, notificationElement, state }) =
 
   fireNotificationEvent({ element, type: loadingNoti })
   
-  try {
-    const currentQueryParams = state.queryParams
-    const currentPaginationParams = state.paginationParams
+  const currentQueryParams = state.queryParams
+  const currentPaginationParams = state.paginationParams
 
-    const currentPage = currentQueryParams.pageValue
-    const limitAdds = currentQueryParams.limitValue
-    const filterKey = currentQueryParams.likeKey
-    const filterValue = currentQueryParams.likeValue
-    const priceMin = currentQueryParams.gteValue
-    const priceMax = currentQueryParams.lteValue
+  const currentPage = currentQueryParams.pageValue
+  const limitAdds = currentQueryParams.limitValue
+  const filterKey = currentQueryParams.likeKey
+  const filterValue = currentQueryParams.likeValue
+  const priceMin = currentQueryParams.gteValue
+  const priceMax = currentQueryParams.lteValue
+
+  try {
 
     const { adds, totalAdds } = await addsModel({ queryParams: currentQueryParams })
 
@@ -63,8 +64,8 @@ export const indexController = async ({ element, notificationElement, state }) =
         price.min = minValue ? minValue : null
         price.max = maxValue ? maxValue : null
 
-        const filteredQueryParams = { gteValue: price.min, lteValue: price.max, pageValue: currentPage, limitValue: limitAdds, likeKey: filterKey, likeValue: filterValue }
-        const filteredState = { queryParams: filteredQueryParams, paginationParams: { pagButtonText }}
+        const filteredQueryParams = { gteValue: price.min, lteValue: price.max, pageValue: null, limitValue: null, likeKey: filterKey, likeValue: filterValue }
+        const filteredState = { queryParams: filteredQueryParams, paginationParams: { pagButtonText: paginateButtonText }}
   
         indexController({ element, notificationElement, state: filteredState })
       }
@@ -75,7 +76,7 @@ export const indexController = async ({ element, notificationElement, state }) =
     nameFilterForm.addEventListener('submit', (event) => {
       event.preventDefault()
 
-      const filteredState = calculateFiltersState({ inputId: 'name', gteValue: priceMin, lteValue: priceMax, pageValue: currentPage, limitValue: limitAdds, pagButtonText })
+      const filteredState = calculateFiltersState({ inputId: 'name', gteValue: priceMin, lteValue: priceMax, pageValue: null, limitValue: null, pagButtonText: paginateButtonText })
 
       indexController({ element, notificationElement, state: filteredState })
     })
@@ -85,7 +86,7 @@ export const indexController = async ({ element, notificationElement, state }) =
     tagsFilterForm.addEventListener('submit', (event) => {
       event.preventDefault()
 
-      const filteredState = calculateFiltersState({ inputId: 'tags', gteValue: priceMin, lteValue: priceMax, pageValue: currentPage, limitValue: limitAdds, pagButtonText })
+      const filteredState = calculateFiltersState({ inputId: 'tags', gteValue: priceMin, lteValue: priceMax, pageValue: null, limitValue: null, pagButtonText: paginateButtonText })
 
       indexController({ element, notificationElement, state: filteredState })
     })
@@ -124,7 +125,7 @@ export const indexController = async ({ element, notificationElement, state }) =
   } catch (error) {
     element.innerHTML = ''
     fireNotificationEvent({ element, type: errorNoti, errorList: [error.message] })
-    if (!(error.message === 'No adds')) {
+    if (!(error.message === 'No adds') || currentPage || limitAdds || filterKey || priceMax || priceMin) {
       setTimeout(() => {
         window.location.href = '/'
       }, 1000)
