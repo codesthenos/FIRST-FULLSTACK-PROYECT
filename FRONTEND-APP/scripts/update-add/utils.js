@@ -61,7 +61,7 @@ export const handleUpdateAdd = async ({
   if (!token) {
     fireNotificationEvent({ element, type: errorNoti, errorList: ['UNATHORIZED Not user logged'] })
     setTimeout(() => {
-      window.location.href = '/routes/login.html'
+      window.location.href = 'login.html'
     }, 1500)
   } else {
     try {
@@ -77,7 +77,7 @@ export const handleUpdateAdd = async ({
       })
       fireNotificationEvent({ element, type: successNoti, message: SUCCESS_MESSAGES.UPDATED_ADD })
       setTimeout(() => {
-        window.location.href = `/routes/add-details.html?id=${add._id}`
+        window.location.href = `add-details.html?id=${add._id}`
       }, 1000)
     } catch (error) {
       fireNotificationEvent({ element, type: errorNoti, errorList: [error.message] })

@@ -7,7 +7,7 @@ import { registerController } from './register/register-controller.js'
 
 document.addEventListener('DOMContentLoaded', () => {
   if (isUserLogged()) {
-    window.location.href = '/'
+    window.location.href = '../index.html'
   }
   
   const registerMain = document.querySelector('main')

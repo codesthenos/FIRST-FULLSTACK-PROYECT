@@ -55,7 +55,7 @@ export const handleLogin = async ({ element, userEmail, userPassword, endpoint }
     fireNotificationEvent({ element, type: successNoti, message: SUCCESS_MESSAGES.LOGGED })
 
     setTimeout(() => {
-      window.location.href = '/'
+      window.location.href = '../index.html'
     }, 750)
   } catch (error) {
     fireNotificationEvent({ element, type: errorNoti, errorList: [error.message] })
@@ -84,14 +84,14 @@ export const handleDeleteAdd = async ({ element, add }) => {
   if (!token) {
     fireNotificationEvent({ element, type: errorNoti, errorList: ['UNATHORIZED Not user logged'] })
     setTimeout(() => {
-      window.location.href = '/routes/login.html'
+      window.location.href = 'login.html'
     }, 1500)
   } else {
     try {
       await deleteAddModel({ addId: add._id, token })
       fireNotificationEvent({ element, type: successNoti, message: SUCCESS_MESSAGES.DELETED_ADD })
       setTimeout(() => {
-        window.location.href = '/'
+        window.location.href = '../index.html'
       }, 1500)
     } catch (error) {
       fireNotificationEvent({ element, type: errorNoti, errorList: [error.message] })
@@ -107,7 +107,7 @@ export const handleDeleteUser = async ({ element }) => {
   if (!token) {
     fireNotificationEvent({ element, type: errorNoti, errorList: ['UNATHORIZED Not user logged'] })
     setTimeout(() => {
-      window.location.href = '/routes/login.html'
+      window.location.href = 'routes/login.html'
     }, 1500)
   } else {
     try {
@@ -116,7 +116,7 @@ export const handleDeleteUser = async ({ element }) => {
       localStorage.removeItem('JWT')
       fireNotificationEvent({ element, type: successNoti, message: SUCCESS_MESSAGES.DELETED_USER })
       setTimeout(() => {
-        window.location.href = '/'
+        window.location.href = 'index.html'
       }, 1500)
     } catch (error) {
       fireNotificationEvent({ element, type: errorNoti, errorList: [error.message] })

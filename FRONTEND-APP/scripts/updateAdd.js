@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateAddMain.innerHTML = ''
     fireNotificationEvent({ element: updateAddMain, type: errorNoti, errorList: ['UNATHORIZED, please login'] })
     setTimeout(() => {
-      window.location.href = '/routes/login.html'
+      window.location.href = 'login.html'
     }, 1500)
   } else {
     setSessionNav({
