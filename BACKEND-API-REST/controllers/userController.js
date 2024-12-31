@@ -1,7 +1,7 @@
 import createHttpError from 'http-errors'
 import jwt from 'jsonwebtoken'
-import { User } from '../models/userModel.js'
-import { Add } from '../models/addModel.js'
+import { BackupUser, User } from '../models/userModel.js'
+import { Add, BackupAdd } from '../models/addModel.js'
 
 export const loginController = async (req, res, next) => {
   try {
@@ -49,13 +49,29 @@ export const deleteUserController = async (req, res, next) => {
   try {
     const { id } = req.params
 
-    const deletedUser = await User.findByIdAndDelete(id)
+    const userToDelete = await User.findById(id)
 
-    if (!deletedUser) {
+    if (!userToDelete) {
       const error = createHttpError(404, 'User not found')
       next(error)
       return
     }
+
+    const backupUser = new BackupUser({
+      ...userToDelete.toObject(),
+      _id: userToDelete._id
+    })
+
+    await backupUser.save()
+
+    await User.findByIdAndDelete(id)
+
+    const userAdds = await Add.find({ owner: id })
+
+    const backupAdds = userAdds.map((add) => add.toObject())
+
+    await BackupAdd.insertMany(backupAdds)
+
     await Add.deleteMany({ owner: id })
 
     res.json({ message: 'User deleted' })

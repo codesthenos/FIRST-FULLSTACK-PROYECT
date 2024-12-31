@@ -20,3 +20,4 @@ userSchema.methods.comparePassword = function ({ password }) {
 }
 
 export const User = mongoose.model('User', userSchema)
+export const BackupUser = mongoose.model('BackupUser', userSchema)

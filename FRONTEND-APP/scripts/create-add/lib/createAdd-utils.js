@@ -31,7 +31,7 @@ export const takeCreateAddInputsValue = ({ tagsContainer }) => {
 export const validateCreateAdd = ({ addNameValue, addDescriptionValue, addImageValue }) => {
   const errors = []
 
-  if (addNameValue.trim().length < 4) {
+  if (addNameValue.trim().length < 3) {
     errors.push('Name cannot be just spaces')
   }
 
