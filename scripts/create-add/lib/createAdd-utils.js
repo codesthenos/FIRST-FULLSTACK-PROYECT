@@ -60,7 +60,7 @@ export const handleCreateAdd = async ({ element, addName, addPrice, addDescripti
     // No needed since i quitted the sessionStorage usage from '/' sessionStorage.clear()
 
     setTimeout(() => {
-      window.location.href = '/'
+      window.location.href = '../index.html'
     }, 750)
   } catch (error) {
     fireNotificationEvent({ element, type: errorNoti, errorList: [error.message] })

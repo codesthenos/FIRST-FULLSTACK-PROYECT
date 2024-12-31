@@ -7,7 +7,7 @@ import { loginController } from './login/login-controller.js'
 
 document.addEventListener('DOMContentLoaded', () => {
   if (isUserLogged()) {
-    window.location.href = '/'
+    window.location.href = '../index.html'
   }
 
   const loginMain = document.querySelector('main')

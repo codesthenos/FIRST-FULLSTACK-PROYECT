@@ -42,7 +42,7 @@ export const createAddController = ({ element, customTag }) => {
         if (!token) {
           fireNotificationEvent({ element, type: errorNoti, errorList: ['PLEASE LOG IN'] })
           setTimeout(() => {
-            window.location.href = '/'
+            window.location.href = '../index.html'
           }, 1500)
         }
         handleCreateAdd({

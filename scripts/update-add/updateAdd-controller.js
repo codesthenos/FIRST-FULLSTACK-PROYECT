@@ -12,7 +12,7 @@ export const updateAddController = async ({ element, addId, customTag }) => {
     element.innerHTML = ''
     fireNotificationEvent({ element, type: errorNoti, errorList: ['No id provided'] })
     setTimeout(() => {
-      window.location.href = '/'
+      window.location.href = '../index.html'
     }, 1000)
   }
 
@@ -24,7 +24,7 @@ export const updateAddController = async ({ element, addId, customTag }) => {
       element.innerHTML = ''
       fireNotificationEvent({ element, type: errorNoti, errorList: ['UNAUTHORIZED user logged is not the owner'] })
       setTimeout(() => {
-        window.location.href = '/'
+        window.location.href = '../index.html'
       }, 1000)
     } else {
       const notificationElement = document.getElementById('notifications-div')

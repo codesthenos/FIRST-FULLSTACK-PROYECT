@@ -10,7 +10,7 @@ export const addDetailsController = async ({ element, notificationElement, addId
   if (!addId) {
     fireNotificationEvent({ element, type: errorNoti, errorList: ['No id provided'] })
     setTimeout(() => {
-      window.location.href = '/'
+      window.location.href = '../index.html'
     }, 1000)
   }
 
@@ -30,7 +30,7 @@ export const addDetailsController = async ({ element, notificationElement, addId
         if (!isUserLogged()) {
           fireNotificationEvent({ element, type: errorNoti, errorList: ['UNATHORIZED, please login'] })
           setTimeout(() => {
-            window.location.href = '/routes/login.html'
+            window.location.href = 'login.html'
           }, 1500)
         } else {
           fireNotificationEvent({ element, type: errorNoti, errorList: ['Service NOT AVIABLE yet'] })
@@ -57,7 +57,7 @@ export const addDetailsController = async ({ element, notificationElement, addId
   } catch (error) {
     fireNotificationEvent({ element, type: errorNoti, errorList: [error.message]})
     setTimeout(() => {
-      window.location.href = '/'
+      window.location.href = '../index.html'
     }, 1500)
   }
 }
