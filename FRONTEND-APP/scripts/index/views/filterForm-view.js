@@ -13,7 +13,7 @@ export const filterFormView = ({ id, name }) => {
   input.setAttribute('required', true)
 
   label.setAttribute('for', id)
-  label.textContent = name.toUpperCase()
+  label.textContent = name.toUpperCase().endsWith('S') ? name.toUpperCase().slice(0, -1) : name.toUpperCase()
 
   submitButton.setAttribute('type', 'submit')
   submitButton.setAttribute('id', `${id}-filter-button`)

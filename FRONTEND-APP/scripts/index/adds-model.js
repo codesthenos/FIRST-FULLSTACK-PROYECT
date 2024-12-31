@@ -11,18 +11,17 @@ export const addsModel = async ({ queryParams }) => {
     }
 
     if (likeValue) {
-      const nextQueryChar = query.endsWith('?') ? '&' : '?'
+      const nextQueryChar = query.includes('/adds?') ? '&' : '?'
       query = `${query}${nextQueryChar}${likeKey}=${likeValue}`
     }
 
-    if (gteValue) {
-      const nextQueryChar = query.endsWith('?') ? '&' : '?'
-      query = `${query}${nextQueryChar}price_gte=${gteValue}`
-    }
+    let price = ''
+    if (gteValue) price = `${gteValue}-`
+    if (lteValue) price += price ? `${lteValue}` : `-${lteValue}`
 
-    if (lteValue) {
-      const nextQueryChar = query.endsWith('?') ? '&' : '?'
-      query = `${query}${nextQueryChar}price_lte=${lteValue}`
+    if (price) {
+      const nextQueryChar = query.includes('/adds?') ? '&' : '?'
+      query = `${query}${nextQueryChar}price=${price}`
     }
 
     const response = await fetch(query)
