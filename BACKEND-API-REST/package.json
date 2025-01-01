@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "similar to json-server, an api rest with auth and a crud",
   "type": "module",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "cross-env PORT=5555 node --watch server.js"
