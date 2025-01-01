@@ -38,7 +38,7 @@ export const REGEXP = {
   image: /^.+\.(jpg|jpeg|png|webp|gif)$/
 }
 // Host
-export const HOST = 'https://first-fullstack-project-e107.onrender.com/'
+export const HOST = 'https://first-fullstack-project-e107.onrender.com'
 // API endpoints
 export const API = {
   REGISTER: `${HOST}/register`,
