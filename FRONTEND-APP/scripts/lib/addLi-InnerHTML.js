@@ -14,13 +14,19 @@ const addTags = addTags => {
   }
 }
 
+const escapeHtml = (unsafe) => {
+  const parser = new DOMParser()
+  const doc = parser.parseFromString(unsafe, 'text/html')
+  return doc.body.textContent || ''
+}
+
 export const addLiHTML = add => {
 
   return `
   <h4>${add.owner.username}</h4>
-  <img src="${HOST}${add.image}" alt="${add.name}" />
-  <h3>${add.name}</h3>
-  <p class="${divDescriptionClassName}">${add.description}</p>
+  <img src="${HOST}${add.image}" alt="${escapeHtml(add.name)}" />
+  <h3>${escapeHtml(add.name)}</h3>
+  <p class="${divDescriptionClassName}">${escapeHtml(add.description)}</p>
   <p><span>Price:</span> ${add.price}€</p>
   <p class="${pFor}">${add.for.toUpperCase()}</p>
   ${add.tags ? addTags(add.tags) : ''}
