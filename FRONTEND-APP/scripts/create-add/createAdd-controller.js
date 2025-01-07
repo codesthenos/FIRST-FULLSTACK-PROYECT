@@ -67,20 +67,24 @@ export const createAddController = ({ element, customTag }) => {
   
       const customTagInput = document.getElementById('custom-tag-input')
       const customTagValue = customTagInput.value.toLowerCase().trim()
-  
+
       const tagRegexp = /^\s*\S.*$/
   
       if (!tagRegexp.test(customTagValue)) {
         fireNotificationEvent({ element, type: errorNoti, errorList: ['PLEASE FILL THE TAG'] })
       } else {
-        const customTagAlreadyExists = tagsContainer.querySelector(`#${customTagValue.replace(/\s+/g, '-')}-div-id`)
-        if (customTagAlreadyExists) {
-          fireNotificationEvent({ element, type: errorNoti, errorList: ['TAG ALREADY EXISTS'] })
-        } else {
-          customTagInput.value = ''
-          removeLoadingClassNames({ element: notificationElement })
-      
-          createAddController({ element, customTag: customTagValue })
+        try {
+          const customTagAlreadyExists = tagsContainer.querySelector(`#${customTagValue.replace(/\s+/g, '-')}-div-id`)
+          if (customTagAlreadyExists) {
+            fireNotificationEvent({ element, type: errorNoti, errorList: ['TAG ALREADY EXISTS'] })
+          } else {
+            customTagInput.value = ''
+            removeLoadingClassNames({ element: notificationElement })
+        
+            createAddController({ element, customTag: customTagValue })
+          }
+        } catch (error) {
+          fireNotificationEvent({ element, type: errorNoti, errorList: ['NO SPECIAL CHARS IN TAG, PLEASE'] })
         }
       }
     })
