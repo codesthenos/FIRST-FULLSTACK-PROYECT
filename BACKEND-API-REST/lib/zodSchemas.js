@@ -1,5 +1,5 @@
 import z from 'zod'
-import sanitizeHtml from 'sanitize-html'
+import { noHtmlRegexp } from './consts.js'
 
 export const userZodSchema = z.object({
   username: z.string({
@@ -17,8 +17,9 @@ export const userZodSchema = z.object({
 export const addZodSchema = z.object({
   name: z.string({
     required_error: 'Provide a name'
-  }).transform(
-    value => sanitizeHtml(value)),
+  }).refine(value => !noHtmlRegexp.test(value), {
+    message: 'HTML tags are not allowed'
+  }),
   price: z.string({
     required_error: 'Provide a price'
   }).refine(
@@ -31,8 +32,9 @@ export const addZodSchema = z.object({
     message: 'Description must be 200 characters or less'
   }).min(10, {
     message: 'Description must have at least 10 characters'
-  }).transform(
-    value => sanitizeHtml(value)),
+  }).refine(value => !noHtmlRegexp.test(value), {
+    message: 'HTML tags are not allowed'
+  }),
   for: z.enum(['offer', 'demand'], {
     required_error: 'For must be offer or demand'
   }),
